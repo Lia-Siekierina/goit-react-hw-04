@@ -1,19 +1,37 @@
-#root {
-  max-width: 1280px;
+body {
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  font-family: sans-serif;
+  line-height: 1.5;
+  background-color: rgba(206, 212, 218, 0.3);
 }
 
-.app {
-  font-family: Arial, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+ul,
+ol {
   margin: 0;
   padding: 0;
-  background-color: #f1f1f1;
+  list-style-type: none;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.gallery {
+  margin-top: 100px;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
 }

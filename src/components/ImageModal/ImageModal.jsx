@@ -1,35 +1,23 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import ReactModal from "react-modal";
 import styles from "./ImageModal.module.css";
 
+ReactModal.setAppElement("#root");
+
 const ImageModal = ({ image, alt, onClose }) => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  const handleImageLoad = () => {
-    setIsLoading(false);
-  };
-
   return (
-    <div className={styles.backdrop} onClick={handleBackdropClick}>
-      <div className={styles.modal}>
-        {isLoading && <div className={styles.loader}>Loading...</div>}
-        <img
-          src={image}
-          alt={alt || "Image"}
-          onLoad={handleImageLoad}
-          className={isLoading ? styles.hidden : ""}
-        />
-        <button type="button" className={styles.closeButton} onClick={onClose}>
-          ✖
-        </button>
-      </div>
-    </div>
+    <ReactModal
+      isOpen={!!image}
+      onRequestClose={onClose}
+      className={styles.modal}
+      overlayClassName={styles.overlay}
+      contentLabel="Image Modal"
+    >
+      <button className={styles.closeButton} onClick={onClose}>
+        &times;
+      </button>
+      <img src={image} alt={alt} className={styles.image} />
+    </ReactModal>
   );
 };
 

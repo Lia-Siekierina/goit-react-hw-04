@@ -5,7 +5,8 @@ import ImageGallery from "./components/ImageGallery/ImageGallery";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageModal from "./components/ImageModal/ImageModal";
-import { Oval } from "react-loader-spinner";
+import Loader from "./components/Loader/Loader";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import { Toaster } from "react-hot-toast";
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
     setImages([]);
     setPage(1);
     setQuery(query);
+    setError(null);
   };
 
   const loadMore = () => {
@@ -60,22 +62,9 @@ function App() {
     <div className="App">
       <SearchBar onSubmit={handleSearch} />
       <main>
-        {error && <p className="error">Error: {error}</p>}
+        {error && <ErrorMessage message={error} />}
         <ImageGallery images={images} onImageClick={handleImageClick} />
-        {isLoading && (
-          <div className="loader">
-            <Oval
-              visible={true}
-              height={80}
-              width={80}
-              color="#4fa94d"
-              ariaLabel="oval-loading"
-              secondaryColor="#4fa94d"
-              strokeWidth={2}
-              strokeWidthSecondary={2}
-            />
-          </div>
-        )}
+        {isLoading && <Loader />}
         {!isLoading && page < totalPages && <LoadMoreBtn onClick={loadMore} />}
         {selectedImage && (
           <ImageModal

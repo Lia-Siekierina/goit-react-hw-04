@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { fetchImages } from "./services/api";
-import "./App.css"; // Глобальні стилі
-
+import "./App.css";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
+import ImageModal from "./components/ImageModal/ImageModal";
+import { Oval } from "react-loader-spinner";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -13,6 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const getImages = async () => {
@@ -45,14 +47,42 @@ function App() {
     }
   };
 
+  const handleImageClick = (imageUrl, altDescription) => {
+    setSelectedImage({ url: imageUrl, alt: altDescription });
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className="App">
       <SearchBar onSubmit={handleSearch} />
       <main>
         {error && <p className="error">Error: {error}</p>}
-        <ImageGallery images={images} />
-        {isLoading && <p>Loading...</p>}
+        <ImageGallery images={images} onImageClick={handleImageClick} />
+        {isLoading && (
+          <div className="loader">
+            <Oval
+              visible={true}
+              height={80}
+              width={80}
+              color="#4fa94d"
+              ariaLabel="oval-loading"
+              secondaryColor="#4fa94d"
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </div>
+        )}
         {!isLoading && page < totalPages && <LoadMoreBtn onClick={loadMore} />}
+        {selectedImage && (
+          <ImageModal
+            image={selectedImage.url}
+            alt={selectedImage.alt}
+            onClose={closeModal}
+          />
+        )}
       </main>
     </div>
   );

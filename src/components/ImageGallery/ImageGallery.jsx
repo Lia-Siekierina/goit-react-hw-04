@@ -6,12 +6,15 @@ const ImageGallery = ({ images, onImageClick }) => {
   return (
     <ul className={styles.gallery}>
       {images.map(({ id, urls, alt_description }) => (
-        <ImageCard
-          key={id}
-          imageUrl={urls.small}
-          alt={alt_description}
-          onClick={() => onImageClick(urls.full)}
-        />
+        <li key={id} className={styles.galleryItem}>
+          <ImageCard
+            imageUrl={urls.small}
+            alt={alt_description}
+            onClick={() =>
+              onImageClick({ url: urls.full, alt: alt_description })
+            }
+          />
+        </li>
       ))}
     </ul>
   );

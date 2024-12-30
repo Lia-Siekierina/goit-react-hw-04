@@ -1,14 +1,3 @@
-/* 
-.button:hover {
-  background-color: #283593;
-  transform: translateY(-3px);
-}
-
-.button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-} */
-
 .loadMoreBtn {
   text-align: center;
   display: block;

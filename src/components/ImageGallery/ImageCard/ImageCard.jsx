@@ -3,12 +3,9 @@ import styles from "./ImageCard.module.css";
 
 const ImageCard = ({ imageUrl, alt, onClick }) => {
   return (
-    <img
-      src={imageUrl}
-      alt={alt || "Image"}
-      className={styles.image}
-      onClick={onClick}
-    />
+    <div onClick={onClick} className={styles.imageCard}>
+      <img src={imageUrl} alt={alt || "Image"} className={styles.image} />
+    </div>
   );
 };
 

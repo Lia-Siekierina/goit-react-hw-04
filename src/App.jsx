@@ -6,6 +6,7 @@ import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageModal from "./components/ImageModal/ImageModal";
 import { Oval } from "react-loader-spinner";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [query, setQuery] = useState("");
@@ -84,6 +85,7 @@ function App() {
           />
         )}
       </main>
+      <Toaster />
     </div>
   );
 }
